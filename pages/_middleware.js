@@ -6,6 +6,9 @@ export async function middleware(req) {
   const token = await getToken({ req, secret: process.env.JWT_SECRET })
   const { pathname } = req.nextUrl
 
+  console.log('PATHNAME IS', pathname)
+  console.log('TOKEN IS', token)
+
   // If user is logged in, redirect to home
   if (token && pathname === '/login') {
     return NextResponse.redirect('/')
@@ -19,7 +22,7 @@ export async function middleware(req) {
   }
 
   // Redirect them to login if they dont have token AND are requesting a protected route
-  if (!token && pathname !== '/login') {
-    return NextResponse.redirect('/login')
-  }
+  // if (!token && pathname !== '/login') {
+  //   return NextResponse.redirect('/login')
+  // }
 }
